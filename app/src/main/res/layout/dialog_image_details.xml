@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="imageObject"
+            type="com.payback.imagepicker.domain.model.Image" />
+
+        <variable
+            name="imageDetailsListener"
+            type="com.payback.imagepicker.presentation.ui.image_details.ImageDetailsDialog" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+
+        <!-- image details container -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:cardCornerRadius="@dimen/dp16w"
+            app:cardElevation="@dimen/dp4w"
+            app:cardPreventCornerOverlap="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline2">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <!-- user name -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/dp8w"
+                        android:layout_marginTop="@dimen/dp16w"
+                        android:layout_marginEnd="@dimen/dp8w"
+                        android:fontFamily="@font/convergence"
+                        android:text="@string/image_details_user_name"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/sp21"
+                        android:textStyle="bold"
+                        app:text="@{imageObject.imageUserName}" />
+                    <!-- image details -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp16w"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/dp8w"
+                            android:layout_marginEnd="@dimen/dp8w"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/dp8w"
+                            android:fontFamily="@font/convergence"
+                            android:gravity="center"
+                            android:text="@string/image_details_likes"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/sp16"
+                            android:textStyle="bold"
+                            app:drawableTopCompat="@drawable/ic_like"
+                            app:text="@{String.valueOf(imageObject.imageLikes)}" />
+
+                        <View
+                            android:layout_width="@dimen/dp1w"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/dp8w"
+                            android:layout_marginTop="@dimen/dp8w"
+                            android:layout_marginEnd="@dimen/dp8w"
+                            android:layout_marginBottom="@dimen/dp8w"
+                            android:background="@color/colorLine" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/dp8w"
+                            android:layout_marginEnd="@dimen/dp8w"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/dp8w"
+                            android:fontFamily="@font/convergence"
+                            android:gravity="center"
+                            android:text="@string/image_details_comments"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/sp16"
+                            android:textStyle="bold"
+                            app:drawableTopCompat="@drawable/ic_comment"
+                            app:text="@{String.valueOf(imageObject.imageComments)}" />
+
+                        <View
+                            android:layout_width="@dimen/dp1w"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/dp8w"
+                            android:layout_marginTop="@dimen/dp8w"
+                            android:layout_marginEnd="@dimen/dp8w"
+                            android:layout_marginBottom="@dimen/dp8w"
+                            android:background="@color/colorLine" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/dp8w"
+                            android:layout_marginEnd="@dimen/dp8w"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/dp8w"
+                            android:fontFamily="@font/convergence"
+                            android:gravity="center"
+                            android:text="@string/image_details_downloads"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/sp16"
+                            android:textStyle="bold"
+                            app:drawableTopCompat="@drawable/ic_download"
+                            app:text="@{String.valueOf(imageObject.imageDownloads)}" />
+
+
+                    </LinearLayout>
+                    <!-- tags chips -->
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp8w"
+                        android:scrollbars="none">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/cg_image_details_chips"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:padding="@dimen/dp8w"
+                            android:layout_gravity="center"
+                            app:singleLine="true"
+                            app:singleSelection="false" />
+                    </HorizontalScrollView>
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/dp90w"
+                    android:layout_height="@dimen/dp4h"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp8w"
+                    android:layout_marginBottom="@dimen/dp16w"
+                    android:background="@color/colorGrey" />
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- image -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:elevation="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_place_holder"
+            app:imageUrl="@{imageObject.imageLarge}"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/colorLightGreyTransparent"/>
+
+        <!-- guidelines -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.70" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.67" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_no_connection_close"
+            android:layout_width="@dimen/dp55w"
+            android:layout_height="@dimen/dp55h"
+            android:padding="@dimen/dp16w"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{()-> imageDetailsListener.onCloseClicked()}"
+            android:src="@drawable/ic_close" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

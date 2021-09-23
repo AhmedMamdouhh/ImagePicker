@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="clickListener"
+            type="com.payback.imagepicker.presentation.response.no_connection.NoConnectionSheet" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <ImageView
+            android:id="@+id/iv_no_connection_close"
+            android:layout_width="@dimen/dp55w"
+            android:layout_height="@dimen/dp55h"
+            android:padding="@dimen/dp16w"
+            android:onClick="@{()-> clickListener.onCloseClicked()}"
+            android:src="@drawable/ic_close"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            card_view:ignore="ContentDescription" />
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lotti_no_connection_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_alignParentBottom="true"
+            app:lottie_rawRes="@raw/no_connection"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true" />
+
+
+        <TextView
+            android:id="@+id/tv_no_connection_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/error_no_connection"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/dp32w"
+            android:textAllCaps="true"
+            android:layout_alignParentBottom="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"/>
+
+
+
+    </RelativeLayout>
+
+</layout>

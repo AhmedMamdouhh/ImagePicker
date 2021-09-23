@@ -6,7 +6,10 @@
     <color name="colorOnSecondary">#000000</color>
 
     <color name="colorBlackTransparent">#33000000</color>
-    <color name="colorLightGrey">#EBEEF1</color>
+    <color name="colorLightGreyTransparent">#33F4F5F7</color>
+    <color name="colorLightGrey">#F4F5F7</color>
+    <color name="colorGrey">#CCD4DB</color>
+    <color name="colorLine">#E6E6E6</color>
 
 
 </resources>

@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">ImageSearch</string>
+
+    <!-- Image Picker -->
+    <string name="image_picker_tags">bird, capulinero, beak</string>
+    <string name="image_picker_user_name">marvinbla</string>
+    <string name="image_picker_search_hint">Search for image</string>
+
+    <!-- Image Details -->
+    <string name="image_details_user_name">tamanna_rumee</string>
+    <string name="image_details_likes">134232</string>
+    <string name="image_details_downloads">2342342</string>
+    <string name="image_details_comments">345362</string>
+
+    <!-- Confirm dialog -->
+    <string name="conform_message">Do you want to see more details ?</string>
+    <string name="conform_no">No</string>
+    <string name="conform_yes">Yes</string>
+
+    <!--Errors -->
+    <!-- base errors-->
+    <string name="error_no_connection">Oops , there\'s no Network connection</string>
+    <string name="error_message_title">Error!</string>
+    <string name="success_message_title">Success</string>
+
 </resources>

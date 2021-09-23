@@ -1,16 +1,24 @@
 package com.payback.imagepicker.di
 
+import android.content.Context
+import androidx.room.Room
+import com.payback.imagepicker.data.db.ImagePickerDao
+import com.payback.imagepicker.data.db.ImagePickerDataBase
 import com.payback.imagepicker.data.remote.Api
+import com.payback.imagepicker.data.repository.ImagePickerRepository
+import com.payback.imagepicker.manager.base.ResponseManager
 import com.payback.imagepicker.manager.utilities.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -28,6 +36,10 @@ object AppModule {
     fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor)
             : OkHttpClient = OkHttpClient
         .Builder()
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(30, TimeUnit.SECONDS)
+        .retryOnConnectionFailure(false)
         .addInterceptor(httpLoggingInterceptor)
         .build()
 
@@ -44,6 +56,32 @@ object AppModule {
     @Singleton
     @Provides
     fun provideApi(retrofit: Retrofit): Api = retrofit.create(Api::class.java)
+
+    //Room configuration :
+    @Singleton
+    @Provides
+    fun provideImagePickerDatabase(
+        @ApplicationContext context: Context
+    ) = Room.databaseBuilder(
+        context,
+        ImagePickerDataBase::class.java,
+        Constants.DATA_BASE_NAME
+    ).allowMainThreadQueries()
+        .build()
+
+    @Singleton
+    @Provides
+    fun provideImagePickerDao(imagePickerDataBase: ImagePickerDataBase) = imagePickerDataBase.getImagePickerDao()
+
+
+    //App
+    @Singleton
+    @Provides
+    fun provideResponseManager() = ResponseManager()
+
+    @Singleton
+    @Provides
+    fun provideImageListRepository(api: Api,imagePickerDao: ImagePickerDao) = ImagePickerRepository(api,imagePickerDao)
 
 
 

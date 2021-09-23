@@ -1,12 +1,21 @@
 package com.payback.imagepicker.domain.model
 
+import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.payback.imagepicker.BR
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 
-class Image : BaseObservable() {
+@Parcelize
+@Entity(tableName = "image_picker_table")
+class Image : BaseObservable(),Parcelable {
 
+    @IgnoredOnParcel
+    @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
     @get:Bindable
     var imageId: Int = 1
@@ -14,7 +23,7 @@ class Image : BaseObservable() {
             field = value
             notifyPropertyChanged(BR.imageId)
         }
-
+    @IgnoredOnParcel
     @SerializedName("user")
     @get:Bindable
     var imageUserName: String = ""
@@ -23,6 +32,7 @@ class Image : BaseObservable() {
             notifyPropertyChanged(BR.imageUserName)
         }
 
+    @IgnoredOnParcel
     @SerializedName("webformatURL")
     @get:Bindable
     var imageSmall: String = ""
@@ -31,6 +41,7 @@ class Image : BaseObservable() {
             notifyPropertyChanged(BR.imageSmall)
         }
 
+    @IgnoredOnParcel
     @SerializedName("largeImageURL")
     @get:Bindable
     var imageLarge: String = ""
@@ -39,6 +50,7 @@ class Image : BaseObservable() {
             notifyPropertyChanged(BR.imageLarge)
         }
 
+    @IgnoredOnParcel
     @SerializedName("tags")
     @get:Bindable
     var imageTagsList: String = ""
@@ -47,6 +59,7 @@ class Image : BaseObservable() {
             notifyPropertyChanged(BR.imageTagsList)
         }
 
+    @IgnoredOnParcel
     @SerializedName("likes")
     @get:Bindable
     var imageLikes: Int = 0
@@ -55,6 +68,7 @@ class Image : BaseObservable() {
             notifyPropertyChanged(BR.imageLikes)
         }
 
+    @IgnoredOnParcel
     @SerializedName("comments")
     @get:Bindable
     var imageComments: Int = 0
@@ -63,6 +77,7 @@ class Image : BaseObservable() {
             notifyPropertyChanged(BR.imageComments)
         }
 
+    @IgnoredOnParcel
     @SerializedName("downloads")
     @get:Bindable
     var imageDownloads: Int = 0

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/imagePicker"
+    android:id="@+id/nav_graph">
+
+    <!-- Image Picker fragment -->
+    <fragment
+        android:id="@+id/imagePicker"
+        android:name="com.payback.imagepicker.presentation.ui.image_picker.ImagePickerFragment"
+        android:label="Image Picker" >
+        <action
+            android:id="@+id/action_imagePicker_to_imageDetailsDialog"
+            app:destination="@id/imageDetailsDialog" />
+    </fragment>
+
+
+    <!-- Image Details Dialog-->
+    <dialog
+        android:id="@+id/imageDetailsDialog"
+        android:name="com.payback.imagepicker.presentation.ui.image_details.ImageDetailsDialog"
+        android:label="ImageDetailsDialog" >
+        <argument
+            android:name="imageObject"
+            app:argType="com.payback.imagepicker.domain.model.Image" />
+    </dialog>
+
+</navigation>
