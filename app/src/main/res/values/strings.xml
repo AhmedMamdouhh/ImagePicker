@@ -5,6 +5,7 @@
     <string name="image_picker_tags">bird, capulinero, beak</string>
     <string name="image_picker_user_name">marvinbla</string>
     <string name="image_picker_search_hint">Search for image</string>
+    <string name="image_picker_not_found">Your search result not found!</string>
 
     <!-- Image Details -->
     <string name="image_details_user_name">tamanna_rumee</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#74b04c</color>
+    <color name="colorPrimaryLight">#B1E693</color>
     <color name="colorAccent">#4d434b</color>
     <color name="colorOnPrimary">#FFFFFF</color>
     <color name="colorOnSecondary">#000000</color>
@@ -10,6 +11,6 @@
     <color name="colorLightGrey">#F4F5F7</color>
     <color name="colorGrey">#CCD4DB</color>
     <color name="colorLine">#E6E6E6</color>
-
+    <color name="colorOffline">#EBEEF1</color>
 
 </resources>

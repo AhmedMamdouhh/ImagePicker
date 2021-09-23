@@ -33,6 +33,7 @@ class ImagePickerViewModel @Inject constructor(
 
     private val _observeImageListData = MutableLiveData<Event<ArrayList<Image>>>()
     private val _observeImageClicked = MutableLiveData<Event<Image>>()
+    private val _observeNotFound = MutableLiveData<Event<Boolean>>()
 
 
     init {
@@ -44,6 +45,10 @@ class ImagePickerViewModel @Inject constructor(
         responseManager.loading()
         val disposable = imageListUseCase.execute(keyWord, { success ->
             responseManager.hideLoading()
+
+            if (success.size ==0)
+                _observeNotFound.value = Event(true)
+
             _observeImageListData.value = Event(success)
         }, { error ->
             responseManager.hideLoading()
@@ -54,16 +59,20 @@ class ImagePickerViewModel @Inject constructor(
     }
 
     fun filterSearchKeyWord(filteredKeyWord: String) {
-        if(filteredKeyWord.isNotEmpty())
+        if (filteredKeyWord.isNotEmpty())
             getImageList(filteredKeyWord)
     }
 
     //Clicked
-    fun onImageClicked(imageObject:Image){ _observeImageClicked.value = Event(imageObject) }
+    fun onImageClicked(imageObject: Image) {
+        _observeImageClicked.value = Event(imageObject)
+    }
 
     //getters:
     val observeImageListData: LiveData<Event<ArrayList<Image>>>
         get() = _observeImageListData
     val observeImageClicked: LiveData<Event<Image>>
         get() = _observeImageClicked
+    val observeNotFound: LiveData<Event<Boolean>>
+        get() = _observeNotFound
 }

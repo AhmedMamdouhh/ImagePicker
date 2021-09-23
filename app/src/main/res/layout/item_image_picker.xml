@@ -62,21 +62,21 @@
                     android:fontFamily="@font/montserrat_bold"
                     android:gravity="center"
                     android:text="@string/image_picker_tags"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/sp15"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/sp13"
                     app:text="@{imagePickerObject.imageTagsList}" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="end"
                     android:layout_marginStart="@dimen/dp8w"
-                    android:layout_marginEnd="@dimen/dp8w"
-                    android:layout_marginBottom="@dimen/dp16w"
-                    android:fontFamily="@font/convergence"
+                    android:fontFamily="@font/montserrat_bold"
                     android:text="@string/image_picker_user_name"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/sp20"
+                    android:background="@color/colorPrimary"
+                    android:padding="@dimen/dp8w"
+                    android:textColor="@color/colorOnPrimary"
+                    android:textSize="@dimen/sp14"
                     app:text="@{imagePickerObject.imageUserName}" />
 
             </LinearLayout>

@@ -26,6 +26,7 @@ class ImageDetailsDialog : BaseBottomSheet() {
         imageDetailsBinding.imageObject = args.imageObject
         imageDetailsBinding.imageDetailsListener = this
 
+
         createChips()
 
         return imageDetailsBinding.root

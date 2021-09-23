@@ -28,11 +28,6 @@
 
 
     <!-- Chip styles. -->
-    <style name="Chip.Default" parent="Widget.MaterialComponents.Chip.Filter">
-        <item name="chipStrokeColor">@color/colorLightGrey</item>
-        <item name="chipStrokeWidth">1dp</item>
-    </style>
-
     <style name="ChipTextStyle">
         <item name="android:textSize">@dimen/dp12h</item>
         <item name="android:textColor">@color/colorPrimary</item>

@@ -3,15 +3,22 @@ package com.payback.imagepicker.manager.utilities
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import com.payback.imagepicker.R
+import com.payback.imagepicker.domain.model.Image
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+
 
 fun SearchView.getQueryTextChangeObservable(): Observable<String> {
 
@@ -59,4 +66,20 @@ fun Fragment.showConfirmDialog(action: NavDirections) {
     no.setOnClickListener {
         alertDialog.dismiss()
     }
+}
+
+fun recyclerAnimationExtension(recyclerView: RecyclerView) {
+    val resId: Int = R.anim.layout_animation
+    val animation: LayoutAnimationController =
+        AnimationUtils.loadLayoutAnimation(recyclerView.context, resId)
+    recyclerView.layoutAnimation = animation
+}
+
+fun convertFromStringToImageList(string: String): ArrayList<Image> {
+    val token: TypeToken<ArrayList<Image>> = object : TypeToken<ArrayList<Image>>() {}
+    return GsonBuilder().create().fromJson(string, token.type)
+}
+
+fun convertFromImageListToString(imageList: ArrayList<Image>): String {
+    return GsonBuilder().create().toJson(imageList)
 }

@@ -18,6 +18,7 @@ object Constants {
     const val DELAY_SMALL = 500L
 
     const val MESSAGE = "message"
+    const val GSON_KEY = "imageList"
 
 
     const val KEY_WORD = "fruits"

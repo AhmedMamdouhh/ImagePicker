@@ -15,22 +15,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_currency_picker_top_cloud"
+            android:layout_width="@dimen/dp150w"
+            android:layout_height="@dimen/dp150h"
+            android:layout_alignParentEnd="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_wave_top_online"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_currency_picker_bottom_cloud"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp200h"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/ic_wave_bottom_online"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_image_picker_search_container"
-            style="@style/CardView.FilledBox"
             android:layout_width="0dp"
             android:layout_height="42dp"
             android:layout_margin="@dimen/dp16w"
             android:layout_weight="1"
+            app:cardElevation="@dimen/dp3w"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_view"
+                style="@style/SearchView.Default"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/SearchView.Default"
+                android:focusable="false"
+                android:focusableInTouchMode="true"
                 app:queryHint="@string/image_picker_search_hint" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -39,12 +62,52 @@
             android:id="@+id/rv_image_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp16w"
             android:clipToPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cv_image_picker_search_container"
             tools:listitem="@layout/item_image_picker" />
+
+        <LinearLayout
+            android:id="@+id/ll_image_picker_not_found_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/dp16w"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_image_picker_search_container">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp16w"
+                android:layout_marginEnd="@dimen/dp16w"
+                android:layout_marginTop="@dimen/dp16w"
+                android:fontFamily="@font/convergence"
+                android:lineSpacingExtra="8sp"
+                android:gravity="top|center"
+                android:layout_gravity="center"
+                android:text="@string/image_picker_not_found"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/sp26"
+                android:textStyle="bold"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:lottie_autoPlay="true"
+                android:layout_margin="@dimen/dp16w"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/not_found" />
+
+
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,7 @@
 package com.payback.imagepicker.manager.base
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -21,6 +22,7 @@ import com.payback.imagepicker.presentation.response.success.SuccessDialog
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -40,11 +42,11 @@ abstract class BaseActivity : AppCompatActivity() {
         observeFailed()
         observeNoConnection()
         observeHideLoading()
+
     }
 
     private fun observeHideLoading() {
         baseActivityViewModel.observeHideLoading.observe(this, EventObserver {
-            Log.e("324324324", "observeHideLoading: ", )
             hideProgress()
         })
     }
@@ -65,7 +67,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
     private fun observeSuccess() {
         baseActivityViewModel.observeSuccess.observe(this, EventObserver { successMessage ->
-            Log.e("324324324", "observeSuccess: ", )
             hideProgress()
             successMessage(successMessage)
         })
@@ -73,7 +74,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     private fun observeLoading() {
         baseActivityViewModel.observeLoading.observe(this, EventObserver {
-            Log.e("324324324", "observeLoading: ", )
+            Log.e("324324324", "observeLoading: ")
             showProgress()
         })
     }
@@ -83,7 +84,6 @@ abstract class BaseActivity : AppCompatActivity() {
         responseManager.observeResponseManager.observe(this, EventObserver
         { responseResource ->
             try {
-                Log.e("324324324", "observeResponse: ", )
                 baseActivityViewModel.getResponseState(responseResource)
             } catch (ex: NullPointerException) {
             }
@@ -142,4 +142,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
+
+
+
 }
