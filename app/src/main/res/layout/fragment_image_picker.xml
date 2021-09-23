@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- top cloud -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_currency_picker_top_cloud"
             android:layout_width="@dimen/dp150w"
@@ -24,7 +25,7 @@
             android:src="@drawable/ic_wave_top_online"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
+        <!-- bottom cloud -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_currency_picker_bottom_cloud"
             android:layout_width="wrap_content"
@@ -35,7 +36,7 @@
             android:src="@drawable/ic_wave_bottom_online"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
+        <!-- search view -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_image_picker_search_container"
             android:layout_width="0dp"
@@ -57,7 +58,7 @@
                 app:queryHint="@string/image_picker_search_hint" />
 
         </com.google.android.material.card.MaterialCardView>
-
+        <!-- image list -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_image_list"
             android:layout_width="match_parent"
@@ -69,45 +70,96 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cv_image_picker_search_container"
             tools:listitem="@layout/item_image_picker" />
-
+        <!-- not found container -->
         <LinearLayout
             android:id="@+id/ll_image_picker_not_found_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="gone"
             android:layout_marginTop="@dimen/dp16w"
             android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cv_image_picker_search_container">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp16w"
-                android:layout_marginEnd="@dimen/dp16w"
-                android:layout_marginTop="@dimen/dp16w"
-                android:fontFamily="@font/convergence"
-                android:lineSpacingExtra="8sp"
-                android:gravity="top|center"
                 android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp16w"
+                android:layout_marginTop="@dimen/dp16w"
+                android:layout_marginEnd="@dimen/dp16w"
+                android:fontFamily="@font/convergence"
+                android:gravity="top|center"
+                android:lineSpacingExtra="8sp"
                 android:text="@string/image_picker_not_found"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/sp26"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp16w"
                 android:scaleType="centerCrop"
                 app:lottie_autoPlay="true"
-                android:layout_margin="@dimen/dp16w"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/not_found" />
 
 
-
         </LinearLayout>
+        <!-- Offline dialog-->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_image_picker_offline_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/dp16w"
+            android:layout_marginTop="@dimen/dp8w"
+            android:layout_marginEnd="@dimen/dp16w"
+            app:cardElevation="@dimen/dp4w"
+            app:cardBackgroundColor="@color/colorGreyDark"
+            android:layout_margin="@dimen/dp16w"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/dp8w"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/image_picker_offline"
+                    android:textColor="@color/colorOnPrimary"
+                    android:textSize="@dimen/sp12"
+                    android:gravity="start|center"
+                    android:layout_marginEnd="@dimen/dp8w"
+                    android:drawablePadding="@dimen/dp16w"
+                    app:drawableStartCompat="@drawable/ic_wifi_off" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="match_parent"
+                    android:gravity="end|center"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:onClick="@{()->imagePickerListener.onRefreshClicked()}"
+                    android:text="@string/image_picker_refresh"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/sp12" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

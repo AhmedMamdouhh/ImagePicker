@@ -19,8 +19,8 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()->imagePickerListener.onImageClicked(imagePickerObject)}"
         android:layout_margin="@dimen/dp8w"
+        android:onClick="@{()->imagePickerListener.onImageClicked(imagePickerObject)}"
         app:cardCornerRadius="@dimen/dp16w"
         app:cardElevation="@dimen/dp4w">
 
@@ -31,10 +31,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:orientation="vertical">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
@@ -44,8 +44,8 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
                         android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
                         app:imageUrl="@{imagePickerObject.imageSmall}"
                         app:srcCompat="@drawable/img_place_holder" />
 
@@ -71,10 +71,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginStart="@dimen/dp8w"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="@string/image_picker_user_name"
                     android:background="@color/colorPrimary"
+                    android:fontFamily="@font/montserrat_bold"
                     android:padding="@dimen/dp8w"
+                    android:text="@string/image_picker_user_name"
                     android:textColor="@color/colorOnPrimary"
                     android:textSize="@dimen/sp14"
                     app:text="@{imagePickerObject.imageUserName}" />

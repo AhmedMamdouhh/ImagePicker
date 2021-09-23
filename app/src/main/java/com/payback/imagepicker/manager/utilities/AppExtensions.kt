@@ -3,15 +3,19 @@ package com.payback.imagepicker.manager.utilities
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.payback.imagepicker.R
@@ -82,4 +86,24 @@ fun convertFromStringToImageList(string: String): ArrayList<Image> {
 
 fun convertFromImageListToString(imageList: ArrayList<Image>): String {
     return GsonBuilder().create().toJson(imageList)
+}
+
+fun connectionSwitcher(
+    topView: ImageView,
+    bottomView: ImageView,
+    cvImagePickerOfflineDialog: MaterialCardView,
+    searchContainer: SearchView,
+    isOnline: Boolean
+) {
+    if (isOnline) {
+        topView.setImageResource(R.drawable.ic_wave_top_online)
+        bottomView.setImageResource(R.drawable.ic_wave_bottom_online)
+        searchContainer.isEnabled = true
+        cvImagePickerOfflineDialog.visibility = GONE
+    } else {
+        topView.setImageResource(R.drawable.ic_wave_top_offline)
+        bottomView.setImageResource(R.drawable.ic_wave_bottom_offline)
+        searchContainer.isEnabled = false
+        cvImagePickerOfflineDialog.visibility = VISIBLE
+    }
 }

@@ -20,6 +20,19 @@
         android:layout_height="match_parent"
         android:background="@android:color/transparent">
 
+        <!-- image -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:elevation="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_place_holder"
+            app:imageUrl="@{imageObject.imageLarge}"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <!-- image details container -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -134,21 +147,16 @@
 
                     </LinearLayout>
                     <!-- tags chips -->
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp8w"
-                        android:layout_marginStart="@dimen/dp8w"
-                        android:layout_marginEnd="@dimen/dp8w"
-                        android:scrollbars="none">
 
-                        <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/cg_image_details_chips"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dp8w"
-                            android:layout_gravity="center" />
-                    </HorizontalScrollView>
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/cg_image_details_chips"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/dp16w"
+                        android:layout_marginTop="@dimen/dp8w"
+                        android:layout_marginEnd="@dimen/dp16w"
+                        android:padding="@dimen/dp8w" />
 
 
                 </LinearLayout>
@@ -160,34 +168,21 @@
                     android:layout_centerInParent="true"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/dp8w"
-                    android:layout_marginBottom="@dimen/dp16w"
+                    android:layout_marginBottom="@dimen/dp8w"
                     android:background="@color/colorGrey" />
 
             </RelativeLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- image -->
-        <androidx.appcompat.widget.AppCompatImageView
+        <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:elevation="0dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_place_holder"
-            app:imageUrl="@{imageObject.imageLarge}"
+            android:background="@color/colorLightGreyTransparent"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/colorLightGreyTransparent"/>
 
         <!-- guidelines -->
         <androidx.constraintlayout.widget.Guideline
@@ -203,16 +198,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.67" />
-
+        <!-- close -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_no_connection_close"
             android:layout_width="@dimen/dp55w"
             android:layout_height="@dimen/dp55h"
-            android:padding="@dimen/dp16w"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:onClick="@{()-> imageDetailsListener.onCloseClicked()}"
-            android:src="@drawable/ic_close" />
+            android:padding="@dimen/dp16w"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

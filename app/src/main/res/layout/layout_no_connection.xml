@@ -23,7 +23,6 @@
             android:onClick="@{()-> clickListener.onCloseClicked()}"
             android:src="@drawable/ic_close"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             card_view:ignore="ContentDescription" />
 
 

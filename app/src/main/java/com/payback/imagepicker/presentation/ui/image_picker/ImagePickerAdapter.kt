@@ -25,9 +25,7 @@ class ImagePickerAdapter(
         holder.bind(imagePickerList[position])
     }
 
-    override fun getItemCount(): Int {
-        return imagePickerList.size
-    }
+    override fun getItemCount() = imagePickerList.size
 
 
 }

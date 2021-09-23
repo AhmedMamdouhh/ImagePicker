@@ -1,7 +1,6 @@
 package com.payback.imagepicker.manager.base
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

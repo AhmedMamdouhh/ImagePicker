@@ -1,7 +1,6 @@
 package com.payback.imagepicker.presentation.ui.image_picker
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -10,8 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
 import com.payback.imagepicker.databinding.FragmentImagePickerBinding
 import com.payback.imagepicker.domain.model.Image
 import com.payback.imagepicker.manager.utilities.*
@@ -28,7 +25,7 @@ class ImagePickerFragment : Fragment() {
     val imagePickerViewModel: ImagePickerViewModel by viewModels()
 
     private lateinit var imagePickerAdapter: ImagePickerAdapter
-    private lateinit var imageListOffline :ArrayList<Image>
+    private lateinit var imageListOffline: ArrayList<Image>
 
 
     override fun onCreateView(
@@ -38,19 +35,51 @@ class ImagePickerFragment : Fragment() {
     ): View {
 
         imagePickerBinding = FragmentImagePickerBinding.inflate(inflater, container, false)
+        imagePickerBinding.imagePickerListener = imagePickerViewModel
 
         observeImageList()
         observeSearchText()
         observeImageClicked()
         observeSearchResultNotFound()
+        observeOfflineMode()
+        observeOnlineMode()
 
 
         return imagePickerBinding.root
     }
 
+
     private fun observeSearchResultNotFound() {
-        imagePickerViewModel.observeNotFound.observe(viewLifecycleOwner,EventObserver{
+        imagePickerViewModel.observeNotFound.observe(viewLifecycleOwner, EventObserver {
             imagePickerBinding.llImagePickerNotFoundContainer.visibility = VISIBLE
+        })
+    }
+
+    private fun observeOfflineMode() {
+        imagePickerViewModel.observeOfflineMode.observe(viewLifecycleOwner, EventObserver {
+            imagePickerBinding.apply {
+                connectionSwitcher(
+                    ivCurrencyPickerTopCloud,
+                    ivCurrencyPickerBottomCloud,
+                    cvImagePickerOfflineDialog,
+                    searchView,
+                    false
+                )
+            }
+        })
+    }
+
+    private fun observeOnlineMode() {
+        imagePickerViewModel.observeOnlineMode.observe(viewLifecycleOwner, EventObserver {
+            imagePickerBinding.apply {
+                connectionSwitcher(
+                    ivCurrencyPickerTopCloud,
+                    ivCurrencyPickerBottomCloud,
+                    cvImagePickerOfflineDialog,
+                    searchView,
+                    true
+                )
+            }
         })
     }
 
@@ -73,8 +102,6 @@ class ImagePickerFragment : Fragment() {
             viewLifecycleOwner,
             EventObserver { imageList ->
                 imageListOffline = imageList
-                Log.e("3254234324", "initializeImageList: ${imageList.size}" )
-
                 initializeImageList(imageList)
             })
     }
@@ -86,7 +113,8 @@ class ImagePickerFragment : Fragment() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { result ->
-                    imagePickerBinding.llImagePickerNotFoundContainer.visibility = GONE
+                    if (result.isNotEmpty())
+                        imagePickerBinding.llImagePickerNotFoundContainer.visibility = GONE
                     imagePickerViewModel.filterSearchKeyWord(result)
                 }
         }
@@ -96,10 +124,12 @@ class ImagePickerFragment : Fragment() {
     private fun initializeImageList(imageList: ArrayList<Image>) {
         imagePickerAdapter = ImagePickerAdapter(imageList, imagePickerViewModel)
         imagePickerBinding.apply {
-            rvImageList.setHasFixedSize(true)
-            rvImageList.layoutManager = GridLayoutManager(requireContext(), 2)
-            rvImageList.adapter = imagePickerAdapter
-            recyclerAnimationExtension(rvImageList)
+            rvImageList.apply {
+                setHasFixedSize(true)
+                layoutManager = GridLayoutManager(requireContext(), 2)
+                adapter = imagePickerAdapter
+                recyclerAnimationExtension(this)
+            }
         }
     }
 
@@ -110,7 +140,7 @@ class ImagePickerFragment : Fragment() {
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        if(savedInstanceState?.containsKey(Constants.GSON_KEY) == true) {
+        if (savedInstanceState?.containsKey(Constants.GSON_KEY) == true) {
             val string = savedInstanceState.get(Constants.GSON_KEY) as String
             val theList = convertFromStringToImageList(string)
             imageListOffline = theList

@@ -88,4 +88,6 @@ dependencies {
 
     //GIF
     implementation "com.airbnb.android:lottie:3.4.4"
+
+
 }

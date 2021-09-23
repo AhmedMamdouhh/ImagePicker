@@ -10,6 +10,7 @@
     <color name="colorLightGreyTransparent">#33F4F5F7</color>
     <color name="colorLightGrey">#F4F5F7</color>
     <color name="colorGrey">#CCD4DB</color>
+    <color name="colorGreyDark">#404042</color>
     <color name="colorLine">#E6E6E6</color>
     <color name="colorOffline">#EBEEF1</color>
 

@@ -21,11 +21,11 @@ class ImageDetailsDialog : BaseBottomSheet() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         imageDetailsBinding =
             DialogImageDetailsBinding.inflate(inflater, container, false)
         imageDetailsBinding.imageObject = args.imageObject
         imageDetailsBinding.imageDetailsListener = this
-
 
         createChips()
 

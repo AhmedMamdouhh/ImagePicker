@@ -1,6 +1,5 @@
 package com.payback.imagepicker.domain.use_case
 
-import android.util.Log
 import com.payback.imagepicker.data.repository.ImagePickerRepository
 import com.payback.imagepicker.domain.model.Image
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,7 +17,7 @@ class ImageListUseCase @Inject constructor(
     fun execute(
         keyWord: String,
         successConsumer: Consumer<ArrayList<Image>>,
-        errorConsumer: Consumer<ArrayList<Image>>
+        errorNoConnectionConsumer: Consumer<ArrayList<Image>>
     ): Disposable {
         return imagePickerRepository.getImageListBySearching(keyWord)
             .subscribeOn(Schedulers.io())
@@ -32,7 +31,7 @@ class ImageListUseCase @Inject constructor(
                 successConsumer.accept(result)
             }, {
                 result= imagePickerRepository.getImageListOffline() as ArrayList<Image>
-                errorConsumer.accept(result)
+                errorNoConnectionConsumer.accept(result)
             })
     }
 }
