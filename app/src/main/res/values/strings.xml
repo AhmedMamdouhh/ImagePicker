@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ImageSearch</string>
+    <string name="app_name">ImagePicker</string>
 
     <!-- Image Picker -->
     <string name="image_picker_tags">bird, capulinero, beak</string>
