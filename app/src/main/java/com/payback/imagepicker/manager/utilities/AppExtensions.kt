@@ -3,6 +3,8 @@ package com.payback.imagepicker.manager.utilities
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
@@ -20,6 +22,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.payback.imagepicker.R
 import com.payback.imagepicker.domain.model.Image
+import com.payback.imagepicker.manager.base.MainActivity
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
@@ -98,12 +101,12 @@ fun connectionSwitcher(
     if (isOnline) {
         topView.setImageResource(R.drawable.ic_wave_top_online)
         bottomView.setImageResource(R.drawable.ic_wave_bottom_online)
-        searchContainer.isEnabled = true
         cvImagePickerOfflineDialog.visibility = GONE
     } else {
         topView.setImageResource(R.drawable.ic_wave_top_offline)
         bottomView.setImageResource(R.drawable.ic_wave_bottom_offline)
-        searchContainer.isEnabled = false
+        searchContainer.setQuery("", false)
+        searchContainer.clearFocus()
         cvImagePickerOfflineDialog.visibility = VISIBLE
     }
 }

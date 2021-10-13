@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.payback.imagepicker.databinding.ItemImagePickerBinding
 import com.payback.imagepicker.domain.model.Image
 
+
 class ImagePickerViewHolder(
     private val imagePickerBinding: ItemImagePickerBinding,
     private val imagePickerViewModel: ImagePickerViewModel

@@ -45,6 +45,7 @@ class ImagePickerFragment : Fragment() {
         observeOnlineMode()
 
 
+
         return imagePickerBinding.root
     }
 

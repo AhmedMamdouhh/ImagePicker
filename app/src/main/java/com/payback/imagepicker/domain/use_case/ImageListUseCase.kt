@@ -19,18 +19,17 @@ class ImageListUseCase @Inject constructor(
         successConsumer: Consumer<ArrayList<Image>>,
         errorNoConnectionConsumer: Consumer<ArrayList<Image>>
     ): Disposable {
-        return imagePickerRepository.getImageListBySearching(keyWord)
+        return imagePickerRepository.requestImages(keyWord)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { response ->
-
                 result = response.hits as ArrayList<Image>
-                imagePickerRepository.insertImagesOffline(result)
+                imagePickerRepository.saveImages(result)
             }
             .subscribe({
                 successConsumer.accept(result)
             }, {
-                result= imagePickerRepository.getImageListOffline() as ArrayList<Image>
+                result= imagePickerRepository.loadImages() as ArrayList<Image>
                 errorNoConnectionConsumer.accept(result)
             })
     }
