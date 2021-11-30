@@ -9,13 +9,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import com.payback.imagepicker.databinding.FragmentImagePickerBinding
-import com.payback.imagepicker.domain.model.Image
+import com.payback.imagepicker.domain.model.image.Image
 import com.payback.imagepicker.manager.utilities.*
+import com.payback.imagepicker.presentation.utils.Constants
+import com.payback.imagepicker.presentation.utils.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 
 @AndroidEntryPoint
@@ -26,7 +31,6 @@ class ImagePickerFragment : Fragment() {
 
     private lateinit var imagePickerAdapter: ImagePickerAdapter
     private lateinit var imageListOffline: ArrayList<Image>
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,37 +55,40 @@ class ImagePickerFragment : Fragment() {
 
 
     private fun observeSearchResultNotFound() {
-        imagePickerViewModel.observeNotFound.observe(viewLifecycleOwner, EventObserver {
-            imagePickerBinding.llImagePickerNotFoundContainer.visibility = VISIBLE
-        })
+        imagePickerViewModel.observeNotFound.observe(viewLifecycleOwner,
+            EventObserver {
+                imagePickerBinding.llImagePickerNotFoundContainer.visibility = VISIBLE
+            })
     }
 
     private fun observeOfflineMode() {
-        imagePickerViewModel.observeOfflineMode.observe(viewLifecycleOwner, EventObserver {
-            imagePickerBinding.apply {
-                connectionSwitcher(
-                    ivCurrencyPickerTopCloud,
-                    ivCurrencyPickerBottomCloud,
-                    cvImagePickerOfflineDialog,
-                    searchView,
-                    false
-                )
-            }
-        })
+        imagePickerViewModel.observeOfflineMode.observe(viewLifecycleOwner,
+           EventObserver {
+                imagePickerBinding.apply {
+                    connectionSwitcher(
+                        ivCurrencyPickerTopCloud,
+                        ivCurrencyPickerBottomCloud,
+                        cvImagePickerOfflineDialog,
+                        searchView,
+                        false
+                    )
+                }
+            })
     }
 
     private fun observeOnlineMode() {
-        imagePickerViewModel.observeOnlineMode.observe(viewLifecycleOwner, EventObserver {
-            imagePickerBinding.apply {
-                connectionSwitcher(
-                    ivCurrencyPickerTopCloud,
-                    ivCurrencyPickerBottomCloud,
-                    cvImagePickerOfflineDialog,
-                    searchView,
-                    true
-                )
-            }
-        })
+        imagePickerViewModel.observeOnlineMode.observe(viewLifecycleOwner,
+            EventObserver {
+                imagePickerBinding.apply {
+                    connectionSwitcher(
+                        ivCurrencyPickerTopCloud,
+                        ivCurrencyPickerBottomCloud,
+                        cvImagePickerOfflineDialog,
+                        searchView,
+                        true
+                    )
+                }
+            })
     }
 
 
@@ -148,6 +155,15 @@ class ImagePickerFragment : Fragment() {
             initializeImageList(theList)
         }
         super.onViewStateRestored(savedInstanceState)
+    }
+
+    private fun convertFromImageListToString(imageList: ArrayList<Image>): String {
+        return GsonBuilder().create().toJson(imageList)
+    }
+
+    private fun convertFromStringToImageList(string: String): ArrayList<Image> {
+        val token: TypeToken<ArrayList<Image>> = object : TypeToken<ArrayList<Image>>() {}
+        return GsonBuilder().create().fromJson(string, token.type)
     }
 
 

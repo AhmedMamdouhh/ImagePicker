@@ -2,7 +2,7 @@ package com.payback.imagepicker.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.payback.imagepicker.domain.model.Image
+import com.payback.imagepicker.domain.model.image.Image
 
 @Database(
     entities = [Image::class],

@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".manager.base.MainActivity">
+        tools:context=".presentation.utils.manager.MainActivity">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/hostFragment"

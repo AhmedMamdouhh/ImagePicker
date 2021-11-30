@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AndroidWorkPlace/ImagePicker/app/src/main/res/drawable/shape_curve_without_border.xml" value="0.26481481481481484" />
+        <entry key="..\:/AndroidWorkPlace/ImagePicker/app/src/main/res/layout/activity_main.xml" value="0.12360688956433637" />
+        <entry key="..\:/AndroidWorkPlace/ImagePicker/app/src/main/res/layout/dialog_image_details.xml" value="0.13125" />
+        <entry key="..\:/AndroidWorkPlace/ImagePicker/app/src/main/res/layout/fragment_image_picker.xml" value="0.12360688956433637" />
+        <entry key="..\:/AndroidWorkPlace/ImagePicker/app/src/main/res/layout/item_image_picker.xml" value="0.12360688956433637" />
+        <entry key="..\:/AndroidWorkPlace/ImagePicker/app/src/main/res/layout/layout_confirm_dialog.xml" value="0.12360688956433637" />
+        <entry key="..\:/AndroidWorkPlace/ImagePicker/app/src/main/res/layout/layout_no_connection.xml" value="0.12360688956433637" />
+      </map>
+    </option>
+  </component>
   <component name="EntryPointsManager">
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="androidx.databinding.BindingAdapter" />

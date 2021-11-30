@@ -11,7 +11,7 @@ import androidx.databinding.DataBindingUtil
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.payback.imagepicker.R
 import com.payback.imagepicker.databinding.LayoutSuccessBinding
-import com.payback.imagepicker.manager.utilities.Constants
+import com.payback.imagepicker.presentation.utils.Constants
 
 class SuccessDialog : BottomSheetDialogFragment() {
     private lateinit var successBinding: LayoutSuccessBinding

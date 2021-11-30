@@ -2,18 +2,20 @@ package com.payback.imagepicker.presentation.ui.image_picker
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.payback.imagepicker.domain.model.Image
-import com.payback.imagepicker.domain.use_case.ImageListUseCase
-import com.payback.imagepicker.manager.base.BaseViewModel
-import com.payback.imagepicker.manager.base.ResponseManager
-import com.payback.imagepicker.manager.utilities.Constants
-import com.payback.imagepicker.manager.utilities.Event
+import com.payback.imagepicker.domain.model.image.Image
+import com.payback.imagepicker.domain.use_case.ImagesUseCase
+import com.payback.imagepicker.presentation.utils.manager.BaseViewModel
+import com.payback.imagepicker.presentation.utils.manager.ResponseManager
+import com.payback.imagepicker.presentation.utils.Constants
+import com.payback.imagepicker.presentation.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.Observable
+import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 @HiltViewModel
 class ImagePickerViewModel @Inject constructor(
-    private val imageListUseCase: ImageListUseCase,
+    private val imagesUseCase: ImagesUseCase,
     private val responseManager: ResponseManager
 ) : BaseViewModel() {
 
@@ -23,22 +25,24 @@ class ImagePickerViewModel @Inject constructor(
     private val _observeOfflineMode = MutableLiveData<Event<Boolean>>()
     private val _observeOnlineMode = MutableLiveData<Event<Boolean>>()
 
+    private lateinit var photosList: ArrayList<Image>
 
 
     init {
-        getImageList(Constants.KEY_WORD)
+        requestImages(Constants.KEY_WORD)
     }
 
 
-    private fun getImageList(keyWord: String) {
+    private fun requestImages(keyWord: String) {
         responseManager.loading()
-        val disposable = imageListUseCase.execute(keyWord, { success ->
+        val disposable = imagesUseCase.execute(keyWord, { successData ->
             responseManager.hideLoading()
-            if (success.size == 0)
+            if (successData.size == 0)
                 _observeNotFound.value = Event(true)
 
-            _observeImageListData.value = Event(success)
+            _observeImageListData.value = Event(successData)
             _observeOnlineMode.value = Event(true)
+            photosList = successData
         }, { error ->
             responseManager.hideLoading()
             _observeOfflineMode.value = Event(true)
@@ -50,7 +54,7 @@ class ImagePickerViewModel @Inject constructor(
 
     fun filterSearchKeyWord(filteredKeyWord: String) {
         if (filteredKeyWord.isNotEmpty())
-            getImageList(filteredKeyWord)
+            requestImages(filteredKeyWord)
     }
 
     //Clicked
@@ -58,8 +62,28 @@ class ImagePickerViewModel @Inject constructor(
         _observeImageClicked.value = Event(imageObject)
     }
     fun onRefreshClicked(){
-        getImageList(Constants.KEY_WORD)
+        requestImages(Constants.KEY_WORD)
     }
+    fun onSearchChange(string:CharSequence, before: Int, count: Int) {
+        Observable.create<CharSequence>{emitter->
+            emitter.onNext(string)
+            emitter.onComplete()
+        }
+            .map { it.toString() }
+            .subscribeBy(
+                onNext = {}
+            )
+
+    }
+
+//    private fun photosListSearch(keyWord: String) {
+//        val newList = ArrayList<Image>()
+//        for (photo in photosList) {
+//            if (photo..contains(keyWord))
+//                newList.add(photo)
+//        }
+//        _observePhotos.value = Event(newList)
+//    }
 
 
     //getters:

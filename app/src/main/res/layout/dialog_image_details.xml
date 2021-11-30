@@ -7,7 +7,7 @@
 
         <variable
             name="imageObject"
-            type="com.payback.imagepicker.domain.model.Image" />
+            type="com.payback.imagepicker.domain.model.image.Image" />
 
         <variable
             name="imageDetailsListener"

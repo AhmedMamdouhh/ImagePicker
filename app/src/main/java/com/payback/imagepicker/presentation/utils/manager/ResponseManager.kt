@@ -1,9 +1,9 @@
-package com.payback.imagepicker.manager.base
+package com.payback.imagepicker.presentation.utils.manager
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.payback.imagepicker.data.Resource
-import com.payback.imagepicker.manager.utilities.Event
+import com.payback.imagepicker.presentation.utils.Event
 
 class ResponseManager{
 

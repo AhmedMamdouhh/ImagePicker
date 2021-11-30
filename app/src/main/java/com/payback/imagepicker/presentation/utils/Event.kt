@@ -1,4 +1,4 @@
-package com.payback.imagepicker.manager.utilities
+package com.payback.imagepicker.presentation.utils
 
 open class Event<out T>(private val content: T) {
 

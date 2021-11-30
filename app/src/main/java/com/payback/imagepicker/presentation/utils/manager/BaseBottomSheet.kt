@@ -1,4 +1,4 @@
-package com.payback.imagepicker.manager.base
+package com.payback.imagepicker.presentation.utils.manager
 
 import android.graphics.Color
 import android.view.View

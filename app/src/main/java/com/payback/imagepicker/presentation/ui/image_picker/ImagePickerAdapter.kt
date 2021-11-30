@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.payback.imagepicker.databinding.ItemImagePickerBinding
-import com.payback.imagepicker.domain.model.Image
+import com.payback.imagepicker.domain.model.image.Image
 
 class ImagePickerAdapter(
     private val imagePickerList: ArrayList<Image>,

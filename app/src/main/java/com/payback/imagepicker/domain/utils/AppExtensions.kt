@@ -3,8 +3,6 @@ package com.payback.imagepicker.manager.utilities
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
@@ -21,8 +19,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.payback.imagepicker.R
-import com.payback.imagepicker.domain.model.Image
-import com.payback.imagepicker.manager.base.MainActivity
+import com.payback.imagepicker.domain.model.image.Image
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
@@ -46,8 +43,6 @@ fun SearchView.getQueryTextChangeObservable(): Observable<String> {
     return subject
 
 }
-
-fun convertFromStringToList(tagsString: String) = tagsString.split(",").toList()
 
 fun Fragment.showConfirmDialog(action: NavDirections) {
 
@@ -82,14 +77,7 @@ fun recyclerAnimationExtension(recyclerView: RecyclerView) {
     recyclerView.layoutAnimation = animation
 }
 
-fun convertFromStringToImageList(string: String): ArrayList<Image> {
-    val token: TypeToken<ArrayList<Image>> = object : TypeToken<ArrayList<Image>>() {}
-    return GsonBuilder().create().fromJson(string, token.type)
-}
 
-fun convertFromImageListToString(imageList: ArrayList<Image>): String {
-    return GsonBuilder().create().toJson(imageList)
-}
 
 fun connectionSwitcher(
     topView: ImageView,

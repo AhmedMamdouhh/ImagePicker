@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.payback.imagepicker.R
 import com.payback.imagepicker.databinding.LayoutNoConnectionBinding
-import com.payback.imagepicker.manager.base.BaseBottomSheet
+import com.payback.imagepicker.presentation.utils.manager.BaseBottomSheet
 
 class NoConnectionSheet : BaseBottomSheet() {
     private lateinit var noConnectionBinding: LayoutNoConnectionBinding

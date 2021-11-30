@@ -2,12 +2,11 @@ package com.payback.imagepicker.di
 
 import android.content.Context
 import androidx.room.Room
-import com.payback.imagepicker.data.db.ImagePickerDao
+import com.payback.imagepicker.BuildConfig
 import com.payback.imagepicker.data.db.ImagePickerDataBase
 import com.payback.imagepicker.data.remote.Api
-import com.payback.imagepicker.data.repository.ImagePickerRepository
-import com.payback.imagepicker.manager.base.ResponseManager
-import com.payback.imagepicker.manager.utilities.Constants
+import com.payback.imagepicker.presentation.utils.manager.ResponseManager
+import com.payback.imagepicker.presentation.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -48,7 +47,7 @@ object AppModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit
         .Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(Constants.BASE_URL)
+        .baseUrl(BuildConfig.BASE_URL)
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .client(okHttpClient)
         .build()
@@ -78,11 +77,6 @@ object AppModule {
     @Singleton
     @Provides
     fun provideResponseManager() = ResponseManager()
-
-    @Singleton
-    @Provides
-    fun provideImageListRepository(api: Api,imagePickerDao: ImagePickerDao) = ImagePickerRepository(api,imagePickerDao)
-
 
 
 }

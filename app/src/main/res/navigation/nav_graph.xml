@@ -22,7 +22,7 @@
         android:label="ImageDetailsDialog" >
         <argument
             android:name="imageObject"
-            app:argType="com.payback.imagepicker.domain.model.Image" />
+            app:argType="com.payback.imagepicker.domain.model.image.Image" />
     </dialog>
 
 </navigation>

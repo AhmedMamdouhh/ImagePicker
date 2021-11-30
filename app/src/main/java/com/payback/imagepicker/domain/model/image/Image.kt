@@ -1,4 +1,4 @@
-package com.payback.imagepicker.domain.model
+package com.payback.imagepicker.domain.model.image
 
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
@@ -7,10 +7,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.payback.imagepicker.BR
-import io.reactivex.Single
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
-import kotlin.jvm.Throws
 
 @Parcelize
 @Entity(tableName = "image_picker_table")
@@ -88,16 +86,4 @@ class Image : BaseObservable(), Parcelable {
             field = value
             notifyPropertyChanged(BR.imageDownloads)
         }
-}
-
-data class ImageResponse(
-    val hits: List<Image>,
-    val total: Int,
-    val totalHits: Int
-)
-
-interface ImageGateway {
-    fun requestImages(searchKeyWord: String): Single<ImageResponse>
-    fun saveImages(images:List<Image>)
-    fun loadImages(): List<Image>
 }

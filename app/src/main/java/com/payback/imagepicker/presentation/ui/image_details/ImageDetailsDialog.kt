@@ -8,8 +8,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.Chip
 import com.payback.imagepicker.R
 import com.payback.imagepicker.databinding.DialogImageDetailsBinding
-import com.payback.imagepicker.manager.base.BaseBottomSheet
-import com.payback.imagepicker.manager.utilities.convertFromStringToList
+import com.payback.imagepicker.presentation.utils.manager.BaseBottomSheet
 
 class ImageDetailsDialog : BaseBottomSheet() {
 
@@ -38,7 +37,8 @@ class ImageDetailsDialog : BaseBottomSheet() {
 
 
     private fun createChips() {
-        convertFromStringToList(args.imageObject.imageTagsList).map {
+        convertFromStringToList(args.imageObject.imageTagsList)
+            .map {
             val chip = Chip(requireContext())
             chip.text = it
             chip.setChipBackgroundColorResource(R.color.colorLightGrey)
@@ -46,4 +46,7 @@ class ImageDetailsDialog : BaseBottomSheet() {
             imageDetailsBinding.cgImageDetailsChips.addView(chip)
         }
     }
+
+    private fun convertFromStringToList(tagsString: String) = tagsString.split(",").toList()
+
 }

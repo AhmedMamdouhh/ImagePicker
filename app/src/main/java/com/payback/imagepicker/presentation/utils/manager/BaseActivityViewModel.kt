@@ -1,10 +1,10 @@
-package com.payback.imagepicker.manager.base
+package com.payback.imagepicker.presentation.utils.manager
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.payback.imagepicker.data.Resource
-import com.payback.imagepicker.manager.utilities.Event
+import com.payback.imagepicker.presentation.utils.Event
 
 class BaseActivityViewModel : ViewModel() {
 
@@ -24,7 +24,6 @@ class BaseActivityViewModel : ViewModel() {
             is Resource.HideLoading -> {_observeHideLoading.value=Event(true)}
         }
     }
-
 
     //getters:
     val observeLoading: LiveData<Event<Boolean>>

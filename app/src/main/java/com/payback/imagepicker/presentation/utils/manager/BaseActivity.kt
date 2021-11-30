@@ -1,11 +1,10 @@
-package com.payback.imagepicker.manager.base
+package com.payback.imagepicker.presentation.utils.manager
 
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.Window
@@ -13,11 +12,11 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.payback.imagepicker.R
-import com.payback.imagepicker.manager.utilities.Constants
-import com.payback.imagepicker.manager.utilities.EventObserver
+import com.payback.imagepicker.presentation.utils.Constants
 import com.payback.imagepicker.presentation.response.error.ErrorSheet
 import com.payback.imagepicker.presentation.response.no_connection.NoConnectionSheet
 import com.payback.imagepicker.presentation.response.success.SuccessDialog
+import com.payback.imagepicker.presentation.utils.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -45,37 +44,41 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     private fun observeHideLoading() {
-        baseActivityViewModel.observeHideLoading.observe(this, EventObserver {
-            hideProgress()
-        })
+        baseActivityViewModel.observeHideLoading.observe(this,
+            EventObserver {
+                hideProgress()
+            })
     }
 
     private fun observeNoConnection() {
-        baseActivityViewModel.observeNoConnection.observe(this, EventObserver {
-            hideProgress()
-            noConnection()
-        })
+        baseActivityViewModel.observeNoConnection.observe(this,
+            EventObserver {
+                hideProgress()
+                noConnection()
+            })
     }
 
     private fun observeFailed() {
-        baseActivityViewModel.observeFailed.observe(this, EventObserver { errorMessage ->
-            hideProgress()
-            failedMessage(errorMessage)
-        })
+        baseActivityViewModel.observeFailed.observe(this,
+            EventObserver { errorMessage ->
+                hideProgress()
+                failedMessage(errorMessage)
+            })
     }
 
     private fun observeSuccess() {
-        baseActivityViewModel.observeSuccess.observe(this, EventObserver { successMessage ->
-            hideProgress()
-            successMessage(successMessage)
-        })
+        baseActivityViewModel.observeSuccess.observe(this,
+            EventObserver { successMessage ->
+                hideProgress()
+                successMessage(successMessage)
+            })
     }
 
     private fun observeLoading() {
-        baseActivityViewModel.observeLoading.observe(this, EventObserver {
-            Log.e("324324324", "observeLoading: ")
-            showProgress()
-        })
+        baseActivityViewModel.observeLoading.observe(this,
+            EventObserver {
+                showProgress()
+            })
     }
 
 
